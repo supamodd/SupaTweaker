@@ -14,14 +14,33 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Instance = this;
-        AdminBadge.Text = WinUtil.IsAdmin()
-            ? "режим администратора"
-            : "запустите от имени администратора";
-        AdminBadge.Foreground = WinUtil.IsAdmin()
-            ? (Brush)FindResource("BrushOk")
-            : (Brush)FindResource("BrushDanger");
+        if (WinUtil.IsAdmin())
+        {
+            AdminBadge.Text = "режим администратора";
+            AdminBadge.Foreground = (Brush)FindResource("BrushOk");
+            AdminChip.Background = new SolidColorBrush(Color.FromArgb(0x28, 0x3D, 0xDC, 0x97));
+        }
+        else
+        {
+            AdminBadge.Text = "запустите от имени администратора";
+            AdminBadge.Foreground = (Brush)FindResource("BrushDanger");
+            AdminChip.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xFF, 0x5C, 0x7A));
+        }
         Navigate("home");
     }
+
+    private void Title_Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2) Max_Click(sender, e);
+        else if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed) DragMove();
+    }
+
+    private void Min_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void Max_Click(object sender, RoutedEventArgs e) =>
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
+    private void Close_Click(object sender, RoutedEventArgs e) => Close();
 
     public void SetStatus(string text) => StatusText.Text = $"{DateTime.Now:HH:mm:ss}  {text}";
 

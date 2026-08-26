@@ -1,0 +1,64 @@
+<Window x:Class="SupaTweaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SupaTweaker" Height="740" Width="1180"
+        MinHeight="680" MinWidth="1040"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BrushBgDeep}"
+        Foreground="{StaticResource BrushText}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="268"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource BrushBgPane}" CornerRadius="0,24,24,0" Margin="0,0,0,0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="22,22,22,8">
+                    <TextBlock Text="SUPA" FontSize="12" FontWeight="Bold" Foreground="{StaticResource BrushAccent2}" LetterSpacing="3"/>
+                    <TextBlock Text="SupaTweaker" FontSize="26" FontWeight="SemiBold" Margin="0,2,0,0"/>
+                    <TextBlock x:Name="AdminBadge" Text="нужны права администратора" FontSize="12" Foreground="{StaticResource BrushMuted}" Margin="0,4,0,12"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Bottom" Margin="12,8,12,18">
+                    <RadioButton Style="{StaticResource NavButton}" Content="⚙  Настройки" Tag="settings" GroupName="nav" Click="Nav_Click"/>
+                </StackPanel>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <RadioButton Style="{StaticResource NavButton}" Content="⌂  Главная" Tag="home" GroupName="nav" IsChecked="True" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="📁  Проводник" Tag="explorer" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="⟳  Windows Update" Tag="update" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="🖥  Система" Tag="system" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="🎨  Персонализация" Tag="personal" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="🗑  UWP приложения" Tag="uwp" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="⚡  Быстрая настройка" Tag="quick" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="☰  Дополнительно" Tag="adv" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="🧩  Компоненты" Tag="comp" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="🚀  Производительность" Tag="perf" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="⏱  Таймер выключения" Tag="sat" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="▦  Процессы" Tag="proc" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="ℹ  О системе" Tag="info" GroupName="nav" Click="Nav_Click"/>
+                        <RadioButton Style="{StaticResource NavButton}" Content="✨  Очистка" Tag="clean" GroupName="nav" Click="Nav_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Margin="28,22,28,8">
+                <TextBlock x:Name="PageTitle" Text="Главная" FontSize="28" FontWeight="SemiBold"/>
+                <TextBlock x:Name="PageSub" Text="Добро пожаловать в SupaTweaker" VerticalAlignment="Bottom" Margin="14,0,0,4" Foreground="{StaticResource BrushMuted}"/>
+            </DockPanel>
+            <Frame x:Name="ContentHost" Grid.Row="1" NavigationUIVisibility="Hidden" Margin="20,0,20,8"/>
+            <Border Grid.Row="2" Background="#0F172A" Padding="20,10">
+                <TextBlock x:Name="StatusText" Text="Готово" Foreground="{StaticResource BrushMuted}"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

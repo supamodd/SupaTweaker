@@ -1,0 +1,18 @@
+<Page x:Class="SupaTweaker.Pages.QuickPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <ScrollViewer>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Быстрая настройка новой Windows" FontSize="18" FontWeight="SemiBold"/>
+                <CheckBox x:Name="A" Content="Показывать расширения файлов" IsChecked="True"/>
+                <CheckBox x:Name="B" Content="Этот компьютер при открытии проводника" IsChecked="True"/>
+                <CheckBox x:Name="C" Content="Тёмная тема" IsChecked="True"/>
+                <CheckBox x:Name="D" Content="Панель задач слева"/>
+                <CheckBox x:Name="E" Content="Схема питания «Высокая производительность»"/>
+                <CheckBox x:Name="F" Content="Отключить советы Windows"/>
+                <Button Style="{StaticResource PrimaryButton}" Content="Применить выбранное" Click="Go" Margin="0,14,0,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

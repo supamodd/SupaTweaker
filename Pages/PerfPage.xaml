@@ -1,0 +1,16 @@
+<Page x:Class="SupaTweaker.Pages.PerfPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <ScrollViewer>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Производительность" FontSize="18" FontWeight="SemiBold"/>
+                <CheckBox x:Name="BestPerf" Content="Визуальные эффекты: обеспечить наилучшее быстродействие"/>
+                <CheckBox x:Name="GameMode" Content="Включить игровой режим"/>
+                <CheckBox x:Name="SysMain" Content="Остановить SysMain (Superfetch)"/>
+                <CheckBox x:Name="HighPow" Content="Высокая производительность (питание)"/>
+                <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply" Margin="0,12,0,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

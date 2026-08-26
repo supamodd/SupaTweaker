@@ -1,0 +1,13 @@
+<Page x:Class="SupaTweaker.Pages.CleanPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <Border Style="{StaticResource Card}">
+        <StackPanel>
+            <TextBlock Text="Очистка" FontSize="18" FontWeight="SemiBold"/>
+            <CheckBox x:Name="Temp" Content="Папка %TEMP%" IsChecked="True"/>
+            <CheckBox x:Name="Prefetch" Content="Prefetch (осторожно)"/>
+            <CheckBox x:Name="Recycle" Content="Корзина"/>
+            <Button Style="{StaticResource PrimaryButton}" Content="Очистить выбранное" Click="Go" Margin="0,12,0,0" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </Border>
+</Page>

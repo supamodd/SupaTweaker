@@ -1,0 +1,20 @@
+<Page x:Class="SupaTweaker.Pages.ProcessPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBox x:Name="Filter" Width="240" Margin="0,0,8,0"/>
+            <Button Style="{StaticResource GhostButton}" Content="Обновить" Click="Refresh"/>
+            <Button Style="{StaticResource DangerButton}" Content="Завершить" Click="Kill"/>
+        </StackPanel>
+        <ListView x:Name="List" Background="#0F172A" Foreground="White" BorderBrush="#1F2A3D">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="PID" DisplayMemberBinding="{Binding Id}" Width="80"/>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding ProcessName}" Width="260"/>
+                    <GridViewColumn Header="ОЗУ, МБ" DisplayMemberBinding="{Binding MemoryMb}" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</Page>

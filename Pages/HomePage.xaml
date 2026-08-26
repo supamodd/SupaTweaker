@@ -1,0 +1,36 @@
+<Page x:Class="SupaTweaker.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent">
+    <ScrollViewer>
+        <StackPanel>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="SupaTweaker 1.0" FontSize="22" FontWeight="SemiBold"/>
+                    <TextBlock TextWrapping="Wrap" Margin="0,8,0,0" Foreground="{StaticResource BrushMuted}"
+                               Text="Современный твикер Windows: персонализация, производительность, очистка и сведения о ПК. Активация Windows не поддерживается."/>
+                </StackPanel>
+            </Border>
+            <UniformGrid Columns="3">
+                <Border Style="{StaticResource Card}" Margin="0,0,10,12">
+                    <StackPanel>
+                        <TextBlock Text="Быстрый старт" FontWeight="SemiBold"/>
+                        <TextBlock Text="Набор твиков для новой системы" Foreground="{StaticResource BrushMuted}" TextWrapping="Wrap" Margin="0,6"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="0,0,10,12">
+                    <StackPanel>
+                        <TextBlock Text="Безопасность" FontWeight="SemiBold"/>
+                        <TextBlock Text="Точки восстановления создавайте перед крупными изменениями" Foreground="{StaticResource BrushMuted}" TextWrapping="Wrap" Margin="0,6"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Visual Studio" FontWeight="SemiBold"/>
+                        <TextBlock Text="Откройте sln в VS Insiders и соберите проект" Foreground="{StaticResource BrushMuted}" TextWrapping="Wrap" Margin="0,6"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

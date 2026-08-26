@@ -1,0 +1,23 @@
+<Page x:Class="SupaTweaker.Pages.ExplorerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent">
+    <ScrollViewer>
+        <StackPanel>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Проводник" FontSize="18" FontWeight="SemiBold"/>
+                    <CheckBox x:Name="ShowExt" Content="Показывать расширения файлов" Checked="OnChange" Unchecked="OnChange"/>
+                    <CheckBox x:Name="ShowHidden" Content="Показывать скрытые файлы" Checked="OnChange" Unchecked="OnChange"/>
+                    <CheckBox x:Name="HideSearch" Content="Скрыть поле поиска в проводнике" Checked="OnChange" Unchecked="OnChange"/>
+                    <CheckBox x:Name="ClassicContext" Content="Классическое контекстное меню (Win11)" Checked="OnChange" Unchecked="OnChange"/>
+                    <CheckBox x:Name="ThisPc" Content="Этот компьютер вместо быстрого доступа" Checked="OnChange" Unchecked="OnChange"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply_Click"/>
+                        <Button Style="{StaticResource GhostButton}" Content="Перезапустить Explorer" Click="Restart_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,16 @@
+<Page x:Class="SupaTweaker.Pages.AdvancedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <ScrollViewer>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Дополнительно" FontSize="18" FontWeight="SemiBold"/>
+                <CheckBox x:Name="Verbose" Content="Подробный статус при загрузке и выключении"/>
+                <CheckBox x:Name="Seconds" Content="Показывать секунды на часах панели задач"/>
+                <CheckBox x:Name="EndTask" Content="«Завершить задачу» в контекстном меню панели задач"/>
+                <CheckBox x:Name="NumLock" Content="NumLock при входе"/>
+                <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply" Margin="0,12,0,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

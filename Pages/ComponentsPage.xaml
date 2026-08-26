@@ -1,0 +1,17 @@
+<Page x:Class="SupaTweaker.Pages.ComponentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+    <ScrollViewer>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Компоненты Windows" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock Text="Открывает стандартные оснастки. Включение/выключение идёт через DISM/optionalfeatures." TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,8"/>
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <Button Style="{StaticResource PrimaryButton}" Content="Компоненты Windows" Click="Opt"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Программы и компоненты" Click="Appwiz"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Возможности по запросу" Click="Fod"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

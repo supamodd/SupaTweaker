@@ -44,6 +44,15 @@
         <Setter Property="Foreground" Value="{StaticResource BrushText}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
+        <Setter Property="TextElement.Foreground" Value="{StaticResource BrushText}"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#F4F7FF"/>
+    </Style>
+
+    <Style TargetType="AccessText">
+        <Setter Property="Foreground" Value="#F4F7FF"/>
     </Style>
 
     <Style TargetType="Label">

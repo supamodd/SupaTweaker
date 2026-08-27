@@ -123,7 +123,7 @@ public partial class MainWindow : Window
                 break;
             case "clean":
                 title = "Очистка";
-                sub = "Временные файлы и корзина";
+                sub = "Файлы, корзина и оперативная память";
                 page = new CleanPage();
                 break;
             case "settings":

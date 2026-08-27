@@ -14,6 +14,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Instance = this;
+        FontFamily = App.UiFont;
         if (WinUtil.IsAdmin())
         {
             AdminBadge.Text = "режим администратора";

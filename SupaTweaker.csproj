@@ -18,6 +18,6 @@
 		<PackageReference Include="System.Management" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Assets\Fonts\InterVariable.ttf" />
+		<Resource Include="Assets\Fonts\*.ttf" />
 	</ItemGroup>
 </Project>

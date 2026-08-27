@@ -44,7 +44,7 @@ public static class MemoryCleaner
             try
             {
                 EmptyWorkingSet(p.Handle);
-                SetProcessWorkingSetSize(p.Handle, nint.MinusOne, nint.MinusOne);
+                SetProcessWorkingSetSize(p.Handle, (nint)(-1), (nint)(-1));
             }
             catch { }
             finally { p.Dispose(); }
@@ -53,9 +53,7 @@ public static class MemoryCleaner
 
     private static void FlushFileCache()
     {
-        var inf = nint.MinusOne;
-        var sup = nint.MinusOne;
-        SetSystemFileCacheSize(inf, sup, 0);
+        SetSystemFileCacheSize((nint)(-1), (nint)(-1), 0);
     }
 
     private static void MemoryList(int command)

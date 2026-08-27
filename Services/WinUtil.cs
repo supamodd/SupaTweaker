@@ -101,7 +101,9 @@ public static class WinUtil
             RedirectStandardError = true
         };
         using var p = Process.Start(psi);
-        return p?.StandardOutput.ReadToEnd() ?? "";
+        var text = p?.StandardOutput.ReadToEnd() ?? "";
+        p?.WaitForExit(8000);
+        return text;
     }
 
     public static void RestartExplorer()

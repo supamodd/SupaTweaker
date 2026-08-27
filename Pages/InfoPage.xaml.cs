@@ -1,8 +1,7 @@
 using System.Globalization;
 using System.Management;
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Xml.Linq;
+using Microsoft.Win32;
 
 namespace SupaTweaker.Pages;
 
@@ -100,6 +99,37 @@ public partial class InfoPage : Page
     {
         using var s = new ManagementObjectSearcher($"SELECT {string.Join(",", props)} FROM {cls}");
         return s.Get().Cast<ManagementObject>().FirstOrDefault();
+    }
+
+    private static string GpuMemory(ManagementObject? gpu)
+    {
+        ulong best = 0;
+        const string cls = @"SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}";
+        try
+        {
+            using var root = Registry.LocalMachine.OpenSubKey(cls);
+            if (root != null)
+            {
+                foreach (var sub in root.GetSubKeyNames())
+                {
+                    using var k = root.OpenSubKey(sub);
+                    var qw = k?.GetValue("HardwareInformation.qwMemorySize");
+                    if (qw is long l && (ulong)l > best) best = (ulong)l;
+                    else if (qw is int i && (ulong)i > best) best = (ulong)i;
+                    else if (qw is byte[] b && b.Length >= 8)
+                    {
+                        var v = BitConverter.ToUInt64(b, 0);
+                        if (v > best) best = v;
+                    }
+                }
+            }
+        }
+        catch { }
+
+        if (best == 0 && ulong.TryParse(W(gpu, "AdapterRAM"), out var wmi))
+            best = wmi;
+
+        return best == 0 ? "—" : Bytes(best.ToString());
     }
 
     private static string W(ManagementObject? o, string p)

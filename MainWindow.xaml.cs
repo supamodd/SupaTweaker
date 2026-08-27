@@ -148,10 +148,11 @@ public partial class MainWindow : Window
     private static void ApplyUiFont(DependencyObject root)
     {
         var font = App.UiFont;
-        if (root is FrameworkElement fe)
-            fe.FontFamily = font;
-        if (root is Window w)
-            TextElement.SetFontFamily(w, font);
+        TextElement.SetFontFamily(root, font);
+        if (root is Control c)
+            c.FontFamily = font;
+        if (root is TextBlock tb)
+            tb.FontFamily = font;
 
         int n = VisualTreeHelper.GetChildrenCount(root);
         for (int i = 0; i < n; i++)

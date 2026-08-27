@@ -1,3 +1,4 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 
@@ -11,38 +12,66 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        UiFont = LoadInter() ?? UiFont;
-        Resources["AppFont"] = UiFont;
+        var loaded = LoadFromDisk() ?? LoadFromPack();
+        if (loaded != null)
+        {
+            UiFont = loaded;
+            Resources["AppFont"] = loaded;
+        }
     }
 
-    private static FontFamily? LoadInter()
+    private static FontFamily? LoadFromDisk()
     {
-        string[] files = ["InterVariable.ttf", "Inter.ttf", "Inter-Regular.ttf", "InterDisplay.ttf"];
-        foreach (var file in files)
+        string[] dirs =
+        [
+            Path.Combine(AppContext.BaseDirectory, "Assets", "Fonts"),
+            Path.Combine(AppContext.BaseDirectory, "Fonts"),
+            Path.Combine(AppContext.BaseDirectory, "Assets"),
+            Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Assets", "Fonts"))
+        ];
+
+        foreach (var dir in dirs)
         {
-            try
+            if (!Directory.Exists(dir)) continue;
+            foreach (var file in Directory.GetFiles(dir, "*.ttf"))
             {
-                var fileUri = new Uri($"pack://application:,,,/Assets/Fonts/{file}");
-                var face = new GlyphTypeface(fileUri);
-                var familyName =
-                    FirstName(face.Win32FamilyNames) ??
-                    FirstName(face.FamilyNames) ??
-                    "Inter";
-                return new FontFamily(new Uri("pack://application:,,,/Assets/Fonts/"), "./#" + familyName);
-            }
-            catch
-            {
-                // следующий файл
+                try
+                {
+                    var gt = new GlyphTypeface(new Uri(file));
+                    var face = "Inter";
+                    foreach (var kv in gt.FamilyNames)
+                    {
+                        if (!string.IsNullOrWhiteSpace(kv.Value))
+                        {
+                            face = kv.Value;
+                            break;
+                        }
+                    }
+
+                    var folder = Path.GetDirectoryName(file)!.Replace('\\', '/') + "/";
+                    if (!folder.StartsWith('/')) folder = "/" + folder;
+                    return new FontFamily(new Uri("file://" + folder), "./#" + face);
+                }
+                catch
+                {
+                    // следующий файл
+                }
             }
         }
         return null;
     }
 
-    private static string? FirstName(LanguageSpecificStringDictionary names)
+    private static FontFamily? LoadFromPack()
     {
-        if (names.Count == 0) return null;
-        foreach (var v in names.Values)
-            if (!string.IsNullOrWhiteSpace(v)) return v;
-        return null;
+        try
+        {
+            var folder = new Uri("pack://application:,,,/Assets/Fonts/");
+            _ = new GlyphTypeface(new Uri("pack://application:,,,/Assets/Fonts/InterVariable.ttf"));
+            return new FontFamily(folder, "./#Inter");
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

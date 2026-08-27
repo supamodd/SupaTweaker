@@ -18,6 +18,8 @@
 		<PackageReference Include="System.Management" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Assets\Fonts\*.ttf" />
+		<Content Include="Assets\Fonts\*.ttf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 </Project>

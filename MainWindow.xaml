@@ -7,7 +7,9 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        FontFamily="{DynamicResource AppFont}"
+        Foreground="{StaticResource BrushText}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -106,13 +108,15 @@
                 </Grid>
 
                 <DockPanel Grid.Row="1" Margin="28,4,28,10">
-                    <TextBlock x:Name="PageTitle" Text="Главная" FontSize="30" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="PageTitle" Text="Главная" FontSize="30" FontWeight="SemiBold" Foreground="{StaticResource BrushText}"/>
                     <TextBlock x:Name="PageSub" Text="Добро пожаловать в SupaTweaker"
                                VerticalAlignment="Bottom" Margin="14,0,0,5" Foreground="{StaticResource BrushMuted}"/>
                 </DockPanel>
 
                 <Frame x:Name="ContentHost" Grid.Row="2" NavigationUIVisibility="Hidden" Margin="20,0,20,8"
-                       Background="Transparent"/>
+                       Background="Transparent"
+                       TextElement.Foreground="{StaticResource BrushText}"
+                       TextElement.FontFamily="{DynamicResource AppFont}"/>
 
                 <Border Grid.Row="3" Padding="28,10" Background="#66070A12">
                     <DockPanel>

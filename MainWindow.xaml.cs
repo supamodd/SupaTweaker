@@ -1,8 +1,9 @@
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using SupaTweaker.Pages;
 using SupaTweaker.Services;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace SupaTweaker;
 
@@ -14,7 +15,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Instance = this;
-        FontFamily = App.UiFont;
+        ApplyUiFont(this);
+        Loaded += (_, _) => ApplyUiFont(this);
         if (WinUtil.IsAdmin())
         {
             AdminBadge.Text = "режим администратора";
@@ -139,5 +141,32 @@ public partial class MainWindow : Window
         PageTitle.Text = title;
         PageSub.Text = sub;
         ContentHost.Navigate(page);
+        page.Loaded += (_, _) => ApplyUiFont(page);
+        ApplyUiFont(this);
+    }
+
+    private static void ApplyUiFont(DependencyObject root)
+    {
+        var font = App.UiFont;
+        if (root is FrameworkElement fe)
+            fe.FontFamily = font;
+        if (root is Window w)
+            TextElement.SetFontFamily(w, font);
+
+        int n = VisualTreeHelper.GetChildrenCount(root);
+        for (int i = 0; i < n; i++)
+            ApplyUiFont(VisualTreeHelper.GetChild(root, i));
+
+        if (root is ContentControl cc && cc.Content is DependencyObject d1)
+            ApplyUiFont(d1);
+        if (root is Decorator dec && dec.Child != null)
+            ApplyUiFont(dec.Child);
+        if (root is Panel panel)
+        {
+            foreach (UIElement child in panel.Children)
+                if (child != null) ApplyUiFont(child);
+        }
+        if (root is Frame f && f.Content is DependencyObject d2)
+            ApplyUiFont(d2);
     }
 }

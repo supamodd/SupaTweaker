@@ -2,21 +2,24 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
     <ScrollViewer>
-        <StackPanel>
-            <Border Style="{StaticResource Card}">
-                <StackPanel>
-                    <TextBlock Text="Политики Windows Update" FontSize="18" FontWeight="SemiBold"/>
-                    <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,10"
-                               Text="Отключение службы обновлений снижает безопасность. Используйте осторожно."/>
-                    <CheckBox x:Name="Pause" Content="Приостановить автоматические обновления (политика)"/>
-                    <CheckBox x:Name="NoDrivers" Content="Не включать драйверы в Windows Update"/>
-                    <CheckBox x:Name="Notify" Content="Уведомлять, но не устанавливать автоматически"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                        <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply"/>
-                        <Button Style="{StaticResource GhostButton}" Content="Сбросить политики" Click="Reset"/>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Политики Windows Update" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,10"
+                           Text="Меняется сразу. Отключение обновлений снижает безопасность."/>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="Pause" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Приостановить автоматические обновления" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="NoDrivers" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Не включать драйверы в Windows Update" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="Notify" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Только уведомлять, не устанавливать" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+            </StackPanel>
+        </Border>
     </ScrollViewer>
 </Page>

@@ -4,12 +4,23 @@
     <ScrollViewer>
         <Border Style="{StaticResource Card}">
             <StackPanel>
-                <TextBlock Text="Дополнительно" FontSize="18" FontWeight="SemiBold"/>
-                <CheckBox x:Name="Verbose" Content="Подробный статус при загрузке и выключении"/>
-                <CheckBox x:Name="Seconds" Content="Показывать секунды на часах панели задач"/>
-                <CheckBox x:Name="EndTask" Content="«Завершить задачу» в контекстном меню панели задач"/>
-                <CheckBox x:Name="NumLock" Content="NumLock при входе"/>
-                <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply" Margin="0,12,0,0" HorizontalAlignment="Left"/>
+                <TextBlock Text="Дополнительно" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="Verbose" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Подробный статус при загрузке и выключении" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="Seconds" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Секунды на часах панели задач" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="EndTask" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="«Завершить задачу» в меню панели задач" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="NumLock" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="NumLock при входе" VerticalAlignment="Center"/>
+                </DockPanel>
             </StackPanel>
         </Border>
     </ScrollViewer>

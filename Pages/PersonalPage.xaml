@@ -5,14 +5,37 @@
         <StackPanel>
             <Border Style="{StaticResource Card}">
                 <StackPanel>
-                    <TextBlock Text="Персонализация" FontSize="18" FontWeight="SemiBold"/>
-                    <CheckBox x:Name="Dark" Content="Тёмная тема приложений"/>
-                    <CheckBox x:Name="DarkSys" Content="Тёмная тема системы"/>
-                    <CheckBox x:Name="TaskLeft" Content="Выровнять панель задач влево (Win11)"/>
-                    <CheckBox x:Name="HideWidgets" Content="Скрыть виджеты на панели задач"/>
-                    <CheckBox x:Name="HideChat" Content="Скрыть чат / Copilot на панели"/>
-                    <CheckBox x:Name="Trans" Content="Эффекты прозрачности"/>
-                    <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply" Margin="0,12,0,0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Персонализация" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <DockPanel Margin="0,10">
+                        <ToggleButton x:Name="Dark" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                        <TextBlock Text="Тёмная тема приложений" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,10">
+                        <ToggleButton x:Name="DarkSys" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                        <TextBlock Text="Тёмная тема системы" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,10">
+                        <ToggleButton x:Name="Trans" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                        <TextBlock Text="Эффекты прозрачности" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,10">
+                        <ToggleButton x:Name="HideWidgets" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                        <TextBlock Text="Скрыть виджеты на панели задач" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,10">
+                        <ToggleButton x:Name="HideChat" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                        <TextBlock Text="Скрыть чат / Copilot на панели" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Значки панели задач" FontSize="16" FontWeight="SemiBold"/>
+                    <TextBlock Text="Выравнивание (Windows 11)" Foreground="{StaticResource BrushMuted}" Margin="0,4,0,12"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton x:Name="AlignLeft" Style="{StaticResource Seg}" Content="Влево" GroupName="align" Checked="AlignChanged"/>
+                        <RadioButton x:Name="AlignCenter" Style="{StaticResource Seg}" Content="По центру" GroupName="align" Checked="AlignChanged"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </StackPanel>

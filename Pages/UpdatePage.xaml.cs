@@ -6,22 +6,25 @@ namespace SupaTweaker.Pages;
 
 public partial class UpdatePage : Page
 {
-    public UpdatePage() => InitializeComponent();
-
-    private void Apply(object s, RoutedEventArgs e)
+    private bool _ready;
+    public UpdatePage()
     {
+        InitializeComponent();
         const string p = @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU";
-        if (Pause.IsChecked == true) WinUtil.SetDword(p, "NoAutoUpdate", 1);
-        if (Notify.IsChecked == true) WinUtil.SetDword(p, "AUOptions", 2);
-        if (NoDrivers.IsChecked == true)
-            WinUtil.SetDword(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate", 1);
-        MainWindow.Instance?.SetStatus("Политики обновлений применены");
+        Pause.IsChecked = WinUtil.GetDword(p, "NoAutoUpdate") == 1;
+        Notify.IsChecked = WinUtil.GetDword(p, "AUOptions") == 2;
+        NoDrivers.IsChecked = WinUtil.GetDword(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate") == 1;
+        _ready = true;
     }
 
-    private void Reset(object s, RoutedEventArgs e)
+    private void OnToggle(object s, RoutedEventArgs e)
     {
-        WinUtil.SetDword(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 0);
-        WinUtil.SetDword(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "AUOptions", 4);
-        MainWindow.Instance?.SetStatus("Политики сброшены");
+        if (!_ready) return;
+        const string p = @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU";
+        WinUtil.SetDword(p, "NoAutoUpdate", Pause.IsChecked == true ? 1 : 0);
+        WinUtil.SetDword(p, "AUOptions", Notify.IsChecked == true ? 2 : 4);
+        WinUtil.SetDword(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate", NoDrivers.IsChecked == true ? 1 : 0);
+        WinUtil.NotifyWindows("Policy");
+        MainWindow.Instance?.SetStatus("Политики обновлений применены сразу");
     }
 }

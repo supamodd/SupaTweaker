@@ -3,21 +3,30 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Background="Transparent">
     <ScrollViewer>
-        <StackPanel>
-            <Border Style="{StaticResource Card}">
-                <StackPanel>
-                    <TextBlock Text="Проводник" FontSize="18" FontWeight="SemiBold"/>
-                    <CheckBox x:Name="ShowExt" Content="Показывать расширения файлов" Checked="OnChange" Unchecked="OnChange"/>
-                    <CheckBox x:Name="ShowHidden" Content="Показывать скрытые файлы" Checked="OnChange" Unchecked="OnChange"/>
-                    <CheckBox x:Name="HideSearch" Content="Скрыть поле поиска в проводнике" Checked="OnChange" Unchecked="OnChange"/>
-                    <CheckBox x:Name="ClassicContext" Content="Классическое контекстное меню (Win11)" Checked="OnChange" Unchecked="OnChange"/>
-                    <CheckBox x:Name="ThisPc" Content="Этот компьютер вместо быстрого доступа" Checked="OnChange" Unchecked="OnChange"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                        <Button Style="{StaticResource PrimaryButton}" Content="Применить" Click="Apply_Click"/>
-                        <Button Style="{StaticResource GhostButton}" Content="Перезапустить Explorer" Click="Restart_Click"/>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+        <Border Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="Проводник" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="ShowExt" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Показывать расширения файлов" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="ShowHidden" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Показывать скрытые файлы" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="HideSearch" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Скрыть поле поиска на панели задач" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="ClassicContext" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Классическое контекстное меню (Win11)" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="ThisPc" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Открывать «Этот компьютер» вместо быстрого доступа" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+            </StackPanel>
+        </Border>
     </ScrollViewer>
 </Page>

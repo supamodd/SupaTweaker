@@ -6,18 +6,25 @@ namespace SupaTweaker.Pages;
 
 public partial class AdvancedPage : Page
 {
-    public AdvancedPage() => InitializeComponent();
-
-    private void Apply(object s, RoutedEventArgs e)
+    private bool _ready;
+    public AdvancedPage()
     {
-        if (Verbose.IsChecked == true)
-            WinUtil.SetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", 1);
-        if (Seconds.IsChecked == true)
-            WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSecondsInSystemClock", 1, false);
-        if (EndTask.IsChecked == true)
-            WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", 1, false);
-        if (NumLock.IsChecked == true)
-            WinUtil.SetDword(@"Control Panel\Keyboard", "InitialKeyboardIndicators", 2, false);
-        MainWindow.Instance?.SetStatus("Дополнительные параметры применены");
+        InitializeComponent();
+        Verbose.IsChecked = WinUtil.GetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus") == 1;
+        Seconds.IsChecked = WinUtil.GetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSecondsInSystemClock", 0, false) == 1;
+        EndTask.IsChecked = WinUtil.GetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", 0, false) == 1;
+        NumLock.IsChecked = WinUtil.GetDword(@"Control Panel\Keyboard", "InitialKeyboardIndicators", 0, false) == 2;
+        _ready = true;
+    }
+
+    private void OnToggle(object s, RoutedEventArgs e)
+    {
+        if (!_ready) return;
+        WinUtil.SetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", Verbose.IsChecked == true ? 1 : 0);
+        WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSecondsInSystemClock", Seconds.IsChecked == true ? 1 : 0, false);
+        WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", EndTask.IsChecked == true ? 1 : 0, false);
+        WinUtil.SetDword(@"Control Panel\Keyboard", "InitialKeyboardIndicators", NumLock.IsChecked == true ? 2 : 0, false);
+        WinUtil.RefreshShellSoon();
+        MainWindow.Instance?.SetStatus("Дополнительно применено сразу");
     }
 }

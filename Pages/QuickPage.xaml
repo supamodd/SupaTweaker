@@ -4,14 +4,33 @@
     <ScrollViewer>
         <Border Style="{StaticResource Card}">
             <StackPanel>
-                <TextBlock Text="Быстрая настройка новой Windows" FontSize="18" FontWeight="SemiBold"/>
-                <CheckBox x:Name="A" Content="Показывать расширения файлов" IsChecked="True"/>
-                <CheckBox x:Name="B" Content="Этот компьютер при открытии проводника" IsChecked="True"/>
-                <CheckBox x:Name="C" Content="Тёмная тема" IsChecked="True"/>
-                <CheckBox x:Name="D" Content="Панель задач слева"/>
-                <CheckBox x:Name="E" Content="Схема питания «Высокая производительность»"/>
-                <CheckBox x:Name="F" Content="Отключить советы Windows"/>
-                <Button Style="{StaticResource PrimaryButton}" Content="Применить выбранное" Click="Go" Margin="0,14,0,0" HorizontalAlignment="Left"/>
+                <TextBlock Text="Быстрая настройка" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock Text="Каждый тумблер применяется сразу." Foreground="{StaticResource BrushMuted}" Margin="0,4,0,8"/>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="A" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Показывать расширения файлов" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="B" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Этот компьютер при открытии проводника" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="C" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Тёмная тема" VerticalAlignment="Center"/>
+                </DockPanel>
+                <TextBlock Text="Панель задач" FontWeight="SemiBold" Margin="0,12,0,8"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="AlignLeft" Style="{StaticResource Seg}" Content="Влево" GroupName="qalign" Checked="Align"/>
+                    <RadioButton x:Name="AlignCenter" Style="{StaticResource Seg}" Content="По центру" GroupName="qalign" Checked="Align"/>
+                </StackPanel>
+                <DockPanel Margin="0,16,0,10">
+                    <ToggleButton x:Name="E" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Схема питания «Высокая производительность»" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel Margin="0,10">
+                    <ToggleButton x:Name="F" Style="{StaticResource Switch}" DockPanel.Dock="Right" Checked="OnToggle" Unchecked="OnToggle"/>
+                    <TextBlock Text="Отключить советы Windows" VerticalAlignment="Center"/>
+                </DockPanel>
             </StackPanel>
         </Border>
     </ScrollViewer>

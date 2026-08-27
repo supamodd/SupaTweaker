@@ -6,16 +6,24 @@ namespace SupaTweaker.Pages;
 
 public partial class SystemPage : Page
 {
-    public SystemPage() => InitializeComponent();
-
-    private void Apply(object s, RoutedEventArgs e)
+    private bool _ready;
+    public SystemPage()
     {
-        if (Hibernate.IsChecked == true) WinUtil.Run("powercfg.exe", "/h off", true);
-        if (FastStart.IsChecked == true)
-            WinUtil.SetDword(@"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", 0);
-        if (UacSoft.IsChecked == true)
-            WinUtil.SetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", 5);
-        MainWindow.Instance?.SetStatus("Системные параметры применены");
+        InitializeComponent();
+        Hibernate.IsChecked = WinUtil.GetDword(@"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", 1) == 0;
+        FastStart.IsChecked = WinUtil.GetDword(@"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", 1) == 0;
+        UacSoft.IsChecked = WinUtil.GetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", 5) == 5;
+        _ready = true;
+    }
+
+    private void OnToggle(object s, RoutedEventArgs e)
+    {
+        if (!_ready) return;
+        WinUtil.Run("powercfg.exe", Hibernate.IsChecked == true ? "/h off" : "/h on", true);
+        WinUtil.SetDword(@"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", FastStart.IsChecked == true ? 0 : 1);
+        WinUtil.SetDword(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", UacSoft.IsChecked == true ? 5 : 2);
+        WinUtil.NotifyWindows("Policy");
+        MainWindow.Instance?.SetStatus("Системные параметры применены сразу");
     }
 
     private void Restore(object s, RoutedEventArgs e)

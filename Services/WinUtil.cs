@@ -1,11 +1,18 @@
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Windows.Threading;
 using Microsoft.Win32;
 
 namespace SupaTweaker.Services;
 
 public static class WinUtil
 {
+    private const uint WmSettingChange = 0x001A;
+    private const uint SmtoAbortIfHung = 0x0002;
+    private static readonly IntPtr HwndBroadcast = new(0xFFFF);
+    private static DispatcherTimer? _explorerTimer;
+
     public static bool IsAdmin()
     {
         using var id = WindowsIdentity.GetCurrent();
@@ -36,6 +43,39 @@ public static class WinUtil
             return v is int i ? i : fallback;
         }
         catch { return fallback; }
+    }
+
+    public static void DeleteKey(string path, bool localMachine = false)
+    {
+        try
+        {
+            var hive = localMachine ? Registry.LocalMachine : Registry.CurrentUser;
+            hive.DeleteSubKeyTree(path, false);
+        }
+        catch { }
+    }
+
+    public static void NotifyWindows(string area = "ImmersiveColorSet")
+    {
+        SendMessageTimeout(HwndBroadcast, WmSettingChange, IntPtr.Zero, area, SmtoAbortIfHung, 100, out _);
+        SendMessageTimeout(HwndBroadcast, WmSettingChange, IntPtr.Zero, "Policy", SmtoAbortIfHung, 100, out _);
+        SHChangeNotify(0x08000000, 0x1000, IntPtr.Zero, IntPtr.Zero);
+    }
+
+    public static void RefreshShellSoon()
+    {
+        NotifyWindows();
+        if (_explorerTimer == null)
+        {
+            _explorerTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(450) };
+            _explorerTimer.Tick += (_, _) =>
+            {
+                _explorerTimer.Stop();
+                RestartExplorer();
+            };
+        }
+        _explorerTimer.Stop();
+        _explorerTimer.Start();
     }
 
     public static void Run(string file, string args, bool wait = false)
@@ -72,4 +112,10 @@ public static class WinUtil
         }
         Process.Start(new ProcessStartInfo("explorer.exe") { UseShellExecute = true });
     }
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    private static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint msg, IntPtr wParam, string lParam, uint flags, uint timeout, out IntPtr result);
+
+    [DllImport("shell32.dll")]
+    private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 }

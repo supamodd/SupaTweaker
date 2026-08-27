@@ -7,7 +7,7 @@
                 <StackPanel>
                     <TextBlock Text="Оперативная память" FontSize="18" FontWeight="SemiBold"/>
                     <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,12"
-                               Text="Как WinMemoryCleaner: обрезает working set процессов, сбрасывает file cache и standby list. Кэш потом наберётся снова — это нормально."/>
+                               Text="Обрезает рабочий набор процессов, сбрасывает кэш файловв и список ожидания. Кэш потом наберётся снова — это нормально."/>
                     <TextBlock x:Name="RamLabel" Text="ОЗУ: —" FontSize="14" Margin="0,0,0,8"/>
                     <Border Height="10" CornerRadius="5" Background="#1A2438">
                         <Border x:Name="RamBar" Width="0" HorizontalAlignment="Left" CornerRadius="5" Background="{StaticResource BrushHero}"/>

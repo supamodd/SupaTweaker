@@ -15,9 +15,9 @@
                         </Border.Background>
                     </Border>
                     <StackPanel Margin="26,24">
-                        <TextBlock Text="SUPA · 1.0" FontSize="12" FontWeight="Bold" Foreground="#3EE0C6"/>
-                        <TextBlock Text="Тихая сила для Windows" FontSize="26" FontWeight="SemiBold" Margin="0,6,0,0"/>
-                        <TextBlock Width="520" TextWrapping="Wrap" Foreground="#C9D2EA" Margin="0,8,0,0"
+                        <TextBlock Text="SUPATWEAKER · 0.3" FontSize="12" FontWeight="Bold" Foreground="#3EE0C6"/>
+                        <TextBlock Text="Различные полезные твики для Windows, и не только." FontSize="26" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        <TextBlock Width="520" TextWrapping="Wrap" Foreground="#C9D2EA"
                                    Text="Персонализация, производительность и уборка без лишнего шума. Активация Windows не входит в программу."/>
                     </StackPanel>
                 </Grid>
@@ -47,8 +47,8 @@
                         <Border Width="36" Height="36" CornerRadius="10" Background="#28FF5C7A" HorizontalAlignment="Left">
                             <TextBlock Text="✦" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Дизайн" FontWeight="SemiBold" FontSize="16" Margin="0,12,0,4"/>
-                        <TextBlock Text="Тёмная студия: стекло, мягкие карточки и акцент cyan / indigo." Foreground="{StaticResource BrushMuted}" TextWrapping="Wrap"/>
+                        <TextBlock Text="Оптимизация" FontWeight="SemiBold" FontSize="16" Margin="0,12,0,4"/>
+                        <TextBlock Text="В разработке..." Foreground="{StaticResource BrushMuted}" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
             </UniformGrid>

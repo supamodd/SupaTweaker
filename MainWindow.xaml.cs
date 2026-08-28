@@ -116,6 +116,11 @@ public partial class MainWindow : Window
                 sub = "Диспетчер задач внутри приложения";
                 page = new ProcessPage();
                 break;
+            case "startup":
+                title = "Автозагрузка";
+                sub = "Программы при входе в Windows";
+                page = new StartupPage();
+                break;
             case "info":
                 title = "О системе";
                 sub = "Характеристики этого ПК";

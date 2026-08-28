@@ -1,0 +1,31 @@
+﻿<Page x:Class="SupaTweaker.Pages.StartupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent">
+    <DockPanel>
+        <Border Style="{StaticResource Card}" DockPanel.Dock="Top" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="Автозагрузка" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,12"
+                           Text="Список как в диспетчере задач. Если вкладка «Автозагрузка» пустая — включите отслеживание программ (кнопка ниже)."/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource PrimaryButton}" Content="Включить" Click="EnableSel"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Отключить" Click="DisableSel"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Обновить" Click="Refresh"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Вернуть список в диспетчере" Click="RestoreList"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Папка автозагрузки" Click="OpenFolder"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <ListView x:Name="List" Background="#0B1220" Foreground="#F4F7FF" BorderBrush="#28FFFFFF">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding Name}" Width="220"/>
+                    <GridViewColumn Header="Состояние" DisplayMemberBinding="{Binding State}" Width="110"/>
+                    <GridViewColumn Header="Источник" DisplayMemberBinding="{Binding Source}" Width="160"/>
+                    <GridViewColumn Header="Команда" DisplayMemberBinding="{Binding Command}" Width="420"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</Page>

@@ -82,6 +82,7 @@
                             <RadioButton Style="{StaticResource NavButton}" Content="  Производительность" Tag="perf" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Таймер выключения" Tag="sat" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Процессы" Tag="proc" GroupName="nav" Click="Nav_Click"/>
+                            <RadioButton Style="{StaticResource NavButton}" Content="  Автозагрузка" Tag="startup" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  О системе" Tag="info" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Очистка" Tag="clean" GroupName="nav" Click="Nav_Click"/>
                         </StackPanel>

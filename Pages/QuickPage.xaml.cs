@@ -34,15 +34,14 @@ public partial class QuickPage : Page
             WinUtil.Run("powercfg.exe", "/setactive SCHEME_BALANCED");
         WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", F.IsChecked == true ? 0 : 1, false);
         WinUtil.NotifyWindows("ImmersiveColorSet");
-        WinUtil.RefreshShellSoon();
-        MainWindow.Instance?.SetStatus("Быстрая настройка применена сразу");
+        MainWindow.Instance?.SetStatus("Быстрая настройка записана");
     }
 
     private void Align(object s, RoutedEventArgs e)
     {
         if (!_ready) return;
         WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", AlignLeft.IsChecked == true ? 0 : 1, false);
-        WinUtil.RefreshShellSoon();
+        WinUtil.RefreshShellSoon(restartExplorer: true);
         MainWindow.Instance?.SetStatus(AlignLeft.IsChecked == true ? "Панель: влево" : "Панель: по центру");
     }
 }

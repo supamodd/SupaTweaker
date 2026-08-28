@@ -24,8 +24,7 @@ public partial class PerfPage : Page
         WinUtil.Run("powercfg.exe", HighPow.IsChecked == true
             ? "/setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
             : "/setactive SCHEME_BALANCED");
-        WinUtil.NotifyWindows();
-        WinUtil.RefreshShellSoon();
+        WinUtil.NotifyWindows("Policy");
         MainWindow.Instance?.SetStatus("Производительность применена сразу");
     }
 }

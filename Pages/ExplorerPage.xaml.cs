@@ -35,7 +35,7 @@ public partial class ExplorerPage : Page
             WinUtil.SetString(cls + @"\InprocServer32", "", "", false);
         else
             WinUtil.DeleteKey(cls, false);
-        WinUtil.RefreshShellSoon();
+        WinUtil.RefreshShellSoon(restartExplorer: true);
         MainWindow.Instance?.SetStatus("Проводник обновлён без выхода из системы");
     }
 }

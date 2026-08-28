@@ -9,7 +9,6 @@ namespace SupaTweaker.Services;
 public static class WinUtil
 {
     private const uint WmSettingChange = 0x001A;
-    private const uint SmtoAbortIfHung = 0x0002;
     private static readonly IntPtr HwndBroadcast = new(0xFFFF);
     private static DispatcherTimer? _explorerTimer;
 
@@ -57,21 +56,25 @@ public static class WinUtil
 
     public static void NotifyWindows(string area = "ImmersiveColorSet")
     {
-        SendMessageTimeout(HwndBroadcast, WmSettingChange, IntPtr.Zero, area, SmtoAbortIfHung, 100, out _);
-        SendMessageTimeout(HwndBroadcast, WmSettingChange, IntPtr.Zero, "Policy", SmtoAbortIfHung, 100, out _);
-        SHChangeNotify(0x08000000, 0x1000, IntPtr.Zero, IntPtr.Zero);
+        try
+        {
+            SendNotifyMessage(HwndBroadcast, WmSettingChange, IntPtr.Zero, area);
+            SHChangeNotify(0x08000000, 0x1000, IntPtr.Zero, IntPtr.Zero);
+        }
+        catch { }
     }
 
-    public static void RefreshShellSoon()
+    public static void RefreshShellSoon(bool restartExplorer = false)
     {
-        NotifyWindows();
+        NotifyWindows("Policy");
+        if (!restartExplorer) return;
         if (_explorerTimer == null)
         {
-            _explorerTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(450) };
+            _explorerTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(800) };
             _explorerTimer.Tick += (_, _) =>
             {
                 _explorerTimer.Stop();
-                RestartExplorer();
+                try { RestartExplorer(); } catch { }
             };
         }
         _explorerTimer.Stop();
@@ -116,7 +119,7 @@ public static class WinUtil
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    private static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint msg, IntPtr wParam, string lParam, uint flags, uint timeout, out IntPtr result);
+    private static extern bool SendNotifyMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
 
     [DllImport("shell32.dll")]
     private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);

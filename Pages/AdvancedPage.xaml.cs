@@ -24,7 +24,7 @@ public partial class AdvancedPage : Page
         WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSecondsInSystemClock", Seconds.IsChecked == true ? 1 : 0, false);
         WinUtil.SetDword(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", EndTask.IsChecked == true ? 1 : 0, false);
         WinUtil.SetDword(@"Control Panel\Keyboard", "InitialKeyboardIndicators", NumLock.IsChecked == true ? 2 : 0, false);
-        WinUtil.RefreshShellSoon();
+        WinUtil.RefreshShellSoon(restartExplorer: true);
         MainWindow.Instance?.SetStatus("Дополнительно применено сразу");
     }
 }

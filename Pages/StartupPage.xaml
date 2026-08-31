@@ -7,7 +7,7 @@
             <StackPanel>
                 <TextBlock Text="Автозагрузка" FontSize="18" FontWeight="SemiBold"/>
                 <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,12"
-                           Text="Список как в диспетчере задач. Если вкладка «Автозагрузка» пустая — включите отслеживание программ (кнопка ниже)."/>
+                           Text="Реестр Run, папки автозагрузки и задания планировщика (вход в систему). Папка часто пустая — это нормально: Teams и PC Manager сидят в реестре или в планировщике. Пустой список в диспетчере задач лечится кнопкой ниже (Start_TrackProgs)."/>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource PrimaryButton}" Content="Включить" Click="EnableSel"/>
                     <Button Style="{StaticResource GhostButton}" Content="Отключить" Click="DisableSel"/>

@@ -138,6 +138,11 @@ public partial class MainWindow : Window
                 sub = "Файлы, корзина и оперативная память";
                 page = new CleanPage();
                 break;
+            case "utils":
+                title = "Утилиты";
+                sub = "Скачать установщики на рабочий стол";
+                page = new UtilitiesPage();
+                break;
             case "settings":
                 title = "Настройки";
                 sub = "О программе";

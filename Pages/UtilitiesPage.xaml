@@ -1,0 +1,35 @@
+﻿<Page x:Class="SupaTweaker.Pages.UtilitiesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent">
+    <DockPanel>
+        <Border Style="{StaticResource Card}" DockPanel.Dock="Top" Padding="16" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="Утилиты" FontSize="18" FontWeight="SemiBold"/>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource BrushMuted}" Margin="0,6,0,12"
+                           Text="Отметьте программы — установщики сохранятся на рабочий стол. Официальные ссылки Steam, Discord, NVIDIA, AMD, Chrome; Obhod Launcher — архив с GitHub."/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource PrimaryButton}" Content="Скачать выбранное" Click="DownloadClick"/>
+                    <Button Style="{StaticResource GhostButton}" Content="Открыть рабочий стол" Click="OpenDesktop"/>
+                </StackPanel>
+                <TextBlock x:Name="StatusLine" Margin="0,10,0,0" Foreground="{StaticResource BrushMuted}" FontSize="12"/>
+            </StackPanel>
+        </Border>
+        <ItemsControl x:Name="Apps">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource JunkRow}">
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock DockPanel.Dock="Right" Text="{Binding Status}" FontSize="12" Foreground="#3EE0C6" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock Text="{Binding Hint}" Foreground="{StaticResource BrushMuted}" FontSize="11"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</Page>

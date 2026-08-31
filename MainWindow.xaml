@@ -85,6 +85,7 @@
                             <RadioButton Style="{StaticResource NavButton}" Content="  Автозагрузка" Tag="startup" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  О системе" Tag="info" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Очистка" Tag="clean" GroupName="nav" Click="Nav_Click"/>
+                            <RadioButton Style="{StaticResource NavButton}" Content="  Утилиты" Tag="utils" GroupName="nav" Click="Nav_Click"/>
                         </StackPanel>
                     </ScrollViewer>
                 </DockPanel>

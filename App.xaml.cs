@@ -1,8 +1,7 @@
-using Microsoft.VisualBasic.FileIO;
-using SupaTweaker.Services;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using SupaTweaker.Services;
 
 namespace SupaTweaker;
 
@@ -14,6 +13,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        ShutdownMode = ShutdownMode.OnExplicitShutdown;
         UiMotion.EnableSmoothScroll();
         var loaded = LoadFromDisk() ?? LoadFromPack();
         if (loaded != null)

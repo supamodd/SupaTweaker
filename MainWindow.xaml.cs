@@ -10,13 +10,18 @@ namespace SupaTweaker;
 public partial class MainWindow : Window
 {
     public static MainWindow? Instance { get; private set; }
+    private TrayService? _tray;
+    private bool _reallyExit;
 
     public MainWindow()
     {
         InitializeComponent();
         Instance = this;
+        ShowInTaskbar = false;
+        WindowState = WindowState.Minimized;
         ApplyUiFont(this);
-        Loaded += (_, _) => ApplyUiFont(this);
+        Loaded += OnLoaded;
+        Closing += OnClosing;
         if (WinUtil.IsAdmin())
         {
             AdminBadge.Text = "режим администратора";
@@ -30,6 +35,28 @@ public partial class MainWindow : Window
             AdminChip.Background = new SolidColorBrush(Color.FromArgb(0x28, 0xFF, 0x5C, 0x7A));
         }
         Navigate("home");
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        ApplyUiFont(this);
+        _tray ??= new TrayService(this);
+        _tray.HideToTray();
+    }
+
+    private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (_reallyExit) return;
+        e.Cancel = true;
+        _tray?.HideToTray();
+    }
+
+    public void ExitApp()
+    {
+        _reallyExit = true;
+        _tray?.Dispose();
+        Close();
+        Application.Current.Shutdown();
     }
 
     private void Title_Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)

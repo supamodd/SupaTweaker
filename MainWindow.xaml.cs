@@ -51,16 +51,10 @@ public partial class MainWindow : Window
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ApplyUiFont(this);
-        try
-        {
-            _tray ??= new TrayService(this);
-            _tray.HideToTray();
-        }
-        catch
-        {
-            ShowInTaskbar = true;
-            WindowState = WindowState.Normal;
-        }
+        ShowInTaskbar = true;
+        WindowState = WindowState.Normal;
+        try { _tray ??= new TrayService(this); }
+        catch { }
     }
 
     private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)

@@ -116,7 +116,11 @@
                 <Frame x:Name="ContentHost" Grid.Row="2" NavigationUIVisibility="Hidden" Margin="20,0,20,8"
                        Background="Transparent"
                        TextElement.Foreground="{StaticResource BrushText}"
-                       TextElement.FontFamily="{DynamicResource AppFont}"/>
+                       TextElement.FontFamily="{DynamicResource AppFont}">
+                    <Frame.RenderTransform>
+                        <TranslateTransform Y="0"/>
+                    </Frame.RenderTransform>
+                </Frame>
 
                 <Border Grid.Row="3" Padding="28,10" Background="#66070A12">
                     <DockPanel>

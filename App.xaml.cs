@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic.FileIO;
+using SupaTweaker.Services;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -12,6 +14,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        UiMotion.EnableSmoothScroll();
         var loaded = LoadFromDisk() ?? LoadFromPack();
         if (loaded != null)
         {

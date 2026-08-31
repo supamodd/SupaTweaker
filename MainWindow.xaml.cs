@@ -47,14 +47,21 @@ public partial class MainWindow : Window
 
     public void SetStatus(string text) => StatusText.Text = $"{DateTime.Now:HH:mm:ss}  {text}";
 
+    private bool _firstNav = true;
+    private bool _navBusy;
+    private string _currentTag = "";
+
     private void Nav_Click(object sender, RoutedEventArgs e)
     {
         if (sender is RadioButton rb && rb.Tag is string tag)
             Navigate(tag);
     }
 
-    private void Navigate(string tag)
+    private async void Navigate(string tag)
     {
+        if (_navBusy || tag == _currentTag) return;
+        _currentTag = tag;
+
         string title;
         string sub;
         Page page;
@@ -145,9 +152,24 @@ public partial class MainWindow : Window
 
         PageTitle.Text = title;
         PageSub.Text = sub;
-        ContentHost.Navigate(page);
-        page.Loaded += (_, _) => ApplyUiFont(page);
-        ApplyUiFont(this);
+        void Show()
+        {
+            ContentHost.Navigate(page);
+            while (ContentHost.CanGoBack) ContentHost.RemoveBackEntry();
+            page.Loaded += (_, _) => ApplyUiFont(page);
+            ApplyUiFont(this);
+        }
+
+        if (_firstNav)
+        {
+            _firstNav = false;
+            Show();
+            return;
+        }
+
+        _navBusy = true;
+        await UiMotion.FadeSwap(ContentHost, Show);
+        _navBusy = false;
     }
 
     private static void ApplyUiFont(DependencyObject root)

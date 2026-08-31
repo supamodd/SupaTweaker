@@ -103,7 +103,6 @@
                                Foreground="#6B7690" FontSize="12"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Style="{StaticResource CaptionBtn}" Content="—" Click="Min_Click"/>
-                        <Button Style="{StaticResource CaptionBtn}" Content="▢" Click="Max_Click"/>
                         <Button Style="{StaticResource CloseBtn}" Content="✕" Click="Close_Click"/>
                     </StackPanel>
                 </Grid>

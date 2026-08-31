@@ -444,4 +444,52 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="JunkRow" TargetType="Border">
+        <Setter Property="Background" Value="#99141C2C"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
+        <Setter Property="BorderBrush" Value="#18FFFFFF"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style x:Key="SectionExpander" TargetType="Expander">
+        <Setter Property="Foreground" Value="#F4F7FF"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IsExpanded" Value="True"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <DockPanel>
+                        <ToggleButton x:Name="hdr" DockPanel.Dock="Top" Cursor="Hand" Background="Transparent" BorderThickness="0"
+                                      Content="{TemplateBinding Header}"
+                                      IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Padding="8,7" CornerRadius="10" Background="#161E2E">
+                                        <DockPanel>
+                                            <TextBlock x:Name="chev" DockPanel.Dock="Right" Text="▾" FontSize="12" Foreground="#8B97B3" VerticalAlignment="Center"/>
+                                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter TargetName="chev" Property="Text" Value="▸"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <ContentPresenter x:Name="exp" Margin="0,6,0,0"/>
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="exp" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

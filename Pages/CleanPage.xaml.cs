@@ -50,15 +50,24 @@ public partial class CleanPage : Page
         ScanBtn.IsEnabled = false;
         CleanBtn.IsEnabled = false;
         JunkTotal.Text = "Сканирование…";
-        JunkLevel.Text = "Считаем кэши и временные файлы";
+        JunkLevel.Text = "Система, драйверы, NVIDIA, Steam, браузеры…";
         var cats = JunkScanner.Categories();
         _items = cats.Select(c => new JunkVm(c)).ToList();
-        Cats.ItemsSource = _items;
         await Task.Run(() => JunkScanner.Scan(cats));
         foreach (var vm in _items) vm.RefreshSize();
+        var visible = _items.Where(x => x.Cat.Bytes > 0).ToList();
+        var sys = visible.Where(x => x.Cat.Group == "system").ToList();
+        var apps = visible.Where(x => x.Cat.Group == "apps").ToList();
+        SysCats.ItemsSource = sys;
+        AppCats.ItemsSource = apps;
+        SysBox.Visibility = sys.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        AppBox.Visibility = apps.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        SysHeader.Text = $"Рекомендуемые / система  ·  {JunkScanner.Format(sys.Sum(x => x.Cat.Bytes))}";
+        AppHeader.Text = $"Другие элементы приложений  ·  {JunkScanner.Format(apps.Sum(x => x.Cat.Bytes))}";
         var total = cats.Sum(c => c.Bytes);
+        var rec = cats.Where(c => c.Group == "system").Sum(c => c.Bytes);
         JunkTotal.Text = JunkScanner.Format(total);
-        JunkLevel.Text = JunkScanner.Level(total);
+        JunkLevel.Text = $"{JunkScanner.Level(total)}  ·  система {JunkScanner.Format(rec)}  ·  приложения {JunkScanner.Format(total - rec)}";
         UpdateSelected();
         ScanBtn.IsEnabled = true;
         CleanBtn.IsEnabled = total > 0;
@@ -71,8 +80,8 @@ public partial class CleanPage : Page
     private void UpdateSelected()
     {
         var n = _items.Where(x => x.Selected).Sum(x => x.Cat.Bytes);
-        var c = _items.Count(x => x.Selected);
-        SelectedLabel.Text = c == 0 ? "Ничего не выбрано" : $"К удалению: {JunkScanner.Format(n)}  ·  разделов {c}";
+        var c = _items.Count(x => x.Selected && x.Cat.Bytes > 0);
+        SelectedLabel.Text = c == 0 ? "Ничего не выбрано" : $"Выбрано к удалению: {JunkScanner.Format(n)}  ·  разделов {c}";
     }
 
     private async void CleanClick(object s, RoutedEventArgs e)

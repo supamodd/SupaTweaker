@@ -18,11 +18,10 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Instance = this;
-        ShowInTaskbar = false;
-        WindowState = WindowState.Minimized;
         ApplyUiFont(this);
         Loaded += OnLoaded;
         Closing += OnClosing;
+        TrySetWindowIcon();
         if (WinUtil.IsAdmin())
         {
             AdminBadge.Text = "режим администратора";
@@ -38,11 +37,30 @@ public partial class MainWindow : Window
         Navigate("home");
     }
 
+    private void TrySetWindowIcon()
+    {
+        try
+        {
+            var uri = new Uri("pack://application:,,,/Assets/SupaTweakerIcon.ico");
+            if (Application.GetResourceStream(uri) != null)
+                Icon = System.Windows.Media.Imaging.BitmapFrame.Create(uri);
+        }
+        catch { }
+    }
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ApplyUiFont(this);
-        _tray ??= new TrayService(this);
-        _tray.HideToTray();
+        try
+        {
+            _tray ??= new TrayService(this);
+            _tray.HideToTray();
+        }
+        catch
+        {
+            ShowInTaskbar = true;
+            WindowState = WindowState.Normal;
+        }
     }
 
     private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
@@ -71,7 +89,11 @@ public partial class MainWindow : Window
     private void Max_Click(object sender, RoutedEventArgs e) =>
         WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
-    private void Close_Click(object sender, RoutedEventArgs e) => Close();
+    private void Close_Click(object sender, RoutedEventArgs e)
+    {
+        if (_tray != null) _tray.HideToTray();
+        else Hide();
+    }
 
     public void SetStatus(string text) => StatusText.Text = $"{DateTime.Now:HH:mm:ss}  {text}";
 

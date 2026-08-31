@@ -9,8 +9,7 @@
         Background="Transparent"
         ResizeMode="CanResize"
         FontFamily="{DynamicResource AppFont}"
-        Foreground="{StaticResource BrushText}"
-        Icon="pack://application:,,,/Assets/SupaTweakerIcon.ico">
+        Foreground="{StaticResource BrushText}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

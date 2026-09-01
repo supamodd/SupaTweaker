@@ -112,6 +112,11 @@ public partial class MainWindow : Window
 
         switch (tag)
         {
+            case "activation":
+                title = "Активация";
+                sub = "Windows через корпоративный KMS-сервер";
+                page = new ActivationPage();
+                break;
             case "explorer":
                 title = "Проводник";
                 sub = "Рабочий стол и Explorer";

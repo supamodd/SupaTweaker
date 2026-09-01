@@ -71,6 +71,7 @@
                         <StackPanel>
                             <TextBlock Text="РАЗДЕЛЫ" Margin="24,8,0,6" FontSize="11" Foreground="{DynamicResource BrushMuted}" FontWeight="SemiBold"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Главная" Tag="home" GroupName="nav" IsChecked="True" Click="Nav_Click"/>
+                            <RadioButton Style="{StaticResource NavButton}" Content="  Активация" Tag="activation" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Проводник" Tag="explorer" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Windows Update" Tag="update" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Система" Tag="system" GroupName="nav" Click="Nav_Click"/>

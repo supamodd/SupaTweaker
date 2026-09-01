@@ -285,19 +285,29 @@
     </Style>
 
     <Style x:Key="Seg" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="{DynamicResource BrushMuted}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="b" CornerRadius="10" Padding="16,8" Background="#142033" Margin="0,0,8,0">
-                        <ContentPresenter HorizontalAlignment="Center"/>
+                    <Border x:Name="b" CornerRadius="10" Padding="16,8" Background="{DynamicResource BrushTrack}" Margin="0,0,8,0">
+                        <ContentPresenter HorizontalAlignment="Center" RecognizesAccessKey="True">
+                            <ContentPresenter.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </Style>
+                                <Style TargetType="AccessText">
+                                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="b" Property="Background" Value="{DynamicResource BrushHero}"/>
-                            <Setter Property="Foreground" Value="#061018"/>
+                            <Setter Property="Foreground" Value="{DynamicResource BrushOnInk}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

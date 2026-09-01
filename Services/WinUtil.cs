@@ -83,15 +83,33 @@ public static class WinUtil
 
     public static void Run(string file, string args, bool wait = false)
     {
-        var psi = new ProcessStartInfo(file, args)
+        try
         {
-            UseShellExecute = false,
-            CreateNoWindow = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true
-        };
-        using var p = Process.Start(psi);
-        if (wait) p?.WaitForExit(120_000);
+            var psi = new ProcessStartInfo
+            {
+                FileName = file,
+                Arguments = args ?? "",
+                UseShellExecute = !wait,
+                CreateNoWindow = wait
+            };
+            if (wait)
+            {
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
+            }
+            using var p = Process.Start(psi);
+            if (wait) p?.WaitForExit(120_000);
+        }
+        catch { }
+    }
+
+    public static void Open(string target, string args = "")
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(target, args) { UseShellExecute = true });
+        }
+        catch { }
     }
 
     public static string RunOut(string file, string args)

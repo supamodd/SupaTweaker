@@ -9,12 +9,12 @@
         Background="Transparent"
         ResizeMode="CanResize"
         FontFamily="{DynamicResource AppFont}"
-        Foreground="{StaticResource BrushText}">
+        Foreground="{DynamicResource BrushText}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
 
-    <Border CornerRadius="18" Background="#FF080B14" BorderBrush="#33FFFFFF" BorderThickness="1">
+    <Border x:Name="Shell" CornerRadius="18" Background="{DynamicResource BrushWindow}" BorderBrush="{DynamicResource BrushHairline}" BorderThickness="1">
         <Border.Effect>
             <DropShadowEffect BlurRadius="28" ShadowDepth="0" Opacity="0.45" Color="#000000"/>
         </Border.Effect>
@@ -44,18 +44,18 @@
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Border Grid.Column="0" Background="{StaticResource BrushPane}" CornerRadius="18,0,0,18">
+            <Border Grid.Column="0" Background="{DynamicResource BrushPane}" CornerRadius="18,0,0,18">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="22,20,18,6"
                                 MouseLeftButtonDown="Title_Drag">
                         <StackPanel Orientation="Horizontal">
-                            <Border Width="36" Height="36" CornerRadius="10" Background="{StaticResource BrushHero}">
-                                <TextBlock Text="S" FontWeight="Bold" FontSize="18" Foreground="#061018"
+                            <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource BrushHero}">
+                                <TextBlock Text="S" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource BrushOnInk}"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                <TextBlock Text="SUPATWEAKER" FontSize="11" FontWeight="Bold" Foreground="{StaticResource BrushAccent2}"/>
-                                <TextBlock Text="Windows studio" FontSize="12" Foreground="{StaticResource BrushMuted}"/>
+                                <TextBlock Text="SUPATWEAKER" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource BrushAccent2}"/>
+                                <TextBlock Text="Windows studio" FontSize="12" Foreground="{DynamicResource BrushMuted}"/>
                             </StackPanel>
                         </StackPanel>
                         <Border x:Name="AdminChip" Margin="0,16,0,8" Padding="10,6" CornerRadius="20" Background="#1A3DDC97" HorizontalAlignment="Left">
@@ -69,7 +69,7 @@
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel>
-                            <TextBlock Text="РАЗДЕЛЫ" Margin="24,8,0,6" FontSize="11" Foreground="#5E6B88" FontWeight="SemiBold"/>
+                            <TextBlock Text="РАЗДЕЛЫ" Margin="24,8,0,6" FontSize="11" Foreground="{DynamicResource BrushMuted}" FontWeight="SemiBold"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Главная" Tag="home" GroupName="nav" IsChecked="True" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Проводник" Tag="explorer" GroupName="nav" Click="Nav_Click"/>
                             <RadioButton Style="{StaticResource NavButton}" Content="  Windows Update" Tag="update" GroupName="nav" Click="Nav_Click"/>
@@ -101,7 +101,7 @@
 
                 <Grid MouseLeftButtonDown="Title_Drag" Background="Transparent">
                     <TextBlock Text="SupaTweaker" VerticalAlignment="Center" Margin="28,0,0,0"
-                               Foreground="#6B7690" FontSize="12"/>
+                               Foreground="{DynamicResource BrushMuted}" FontSize="12"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Style="{StaticResource CaptionBtn}" Content="—" Click="Min_Click"/>
                         <Button Style="{StaticResource CloseBtn}" Content="✕" Click="Close_Click"/>
@@ -109,14 +109,14 @@
                 </Grid>
 
                 <DockPanel Grid.Row="1" Margin="28,4,28,10">
-                    <TextBlock x:Name="PageTitle" Text="Главная" FontSize="30" FontWeight="SemiBold" Foreground="{StaticResource BrushText}"/>
+                    <TextBlock x:Name="PageTitle" Text="Главная" FontSize="30" FontWeight="SemiBold" Foreground="{DynamicResource BrushText}"/>
                     <TextBlock x:Name="PageSub" Text="Добро пожаловать в SupaTweaker"
-                               VerticalAlignment="Bottom" Margin="14,0,0,5" Foreground="{StaticResource BrushMuted}"/>
+                               VerticalAlignment="Bottom" Margin="14,0,0,5" Foreground="{DynamicResource BrushMuted}"/>
                 </DockPanel>
 
                 <Frame x:Name="ContentHost" Grid.Row="2" NavigationUIVisibility="Hidden" Margin="20,0,20,8"
                        Background="Transparent"
-                       TextElement.Foreground="{StaticResource BrushText}"
+                       TextElement.Foreground="{DynamicResource BrushText}"
                        TextElement.FontFamily="{DynamicResource AppFont}">
                     <Frame.RenderTransform>
                         <TranslateTransform Y="0"/>

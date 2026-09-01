@@ -13,6 +13,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
+        ThemeService.Apply(AppSettings.Theme);
         base.OnStartup(e);
         UiMotion.EnableSmoothScroll();
         var loaded = LoadFromDisk() ?? LoadFromPack();

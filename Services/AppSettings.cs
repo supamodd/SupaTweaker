@@ -7,6 +7,24 @@ public static class AppSettings
     private const string Key = @"Software\SupaTweaker";
     private const string TaskName = "SupaTweaker";
 
+    public static string Theme
+    {
+        get
+        {
+            try
+            {
+                using var k = Registry.CurrentUser.OpenSubKey(Key);
+                return k?.GetValue("Theme") as string ?? ThemeService.Standard;
+            }
+            catch { return ThemeService.Standard; }
+        }
+        set
+        {
+            using var k = Registry.CurrentUser.CreateSubKey(Key, true);
+            k?.SetValue("Theme", value);
+        }
+    }
+
     public static bool AutoStart
     {
         get => WinUtil.GetDword(Key, "AutoStart", 0, false) == 1;
